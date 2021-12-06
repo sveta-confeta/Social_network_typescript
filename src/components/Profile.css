@@ -1,0 +1,13 @@
+img{
+    grid-area: i;
+
+}
+
+/*.main-img {
+   object-fit: cover;
+
+}*/
+
+.content {
+    grid-area: c;
+}
