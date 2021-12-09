@@ -1,9 +1,10 @@
 import React from 'react';
 import './App.css';
 
-import Navbar from "./components/Navbar";
-import Header from "./components/Header";
-import Profile from "./components/Profile";
+import Navbar from "./components/Navbar/Navbar";
+import Header from "./components/header/Header";
+import Profile from "./components/Profile/Profile";
+
 
 const App = () => {
   return (
