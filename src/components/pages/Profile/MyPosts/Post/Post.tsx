@@ -6,7 +6,7 @@ type PostPropsType={
     count:number
 }
 
-export const Post=(props: PostPropsType) =>{
+export const Post:React.FC<PostPropsType>=(props ) =>{
     return (
         <div className={s.item}>
             <img

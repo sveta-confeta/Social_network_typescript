@@ -11,6 +11,18 @@
     color:#fff;
     padding-bottom: 10px;
 }
-.active{
+.item .active{
     color: aquamarine;
 }
+.item a{
+    text-decoration: none;
+    color: white;
+}
+.item a:hover{
+    color: moccasin;
+}
+.item:last-child a:hover{
+    color: red;
+}
+
+

@@ -11,6 +11,15 @@
 
 
 
+.app-wrapper-content{
+
+    grid-area: i;
+    background-image: linear-gradient(to bottom,#383737, #838282 );
+
+
+}
+
+
 
 
 /*.main-image {

@@ -1,0 +1,28 @@
+.dialogs{
+    color:#fff;
+    min-height: 300px;
+    display: grid;
+    grid-template-columns: 2fr 9fr;
+    padding-top: 30px;
+    padding-left: 30px;
+}
+
+.dialogs_items .active{
+    color:aqua;
+
+}
+
+.dialog{
+    margin-bottom: 10px;
+}
+.dialog:hover a{
+    color:aqua;
+}
+.dialog a{
+    text-decoration: none;
+    color: white;
+
+}
+
+
+
