@@ -4,6 +4,7 @@ import React from "react";
 type PostPropsType={
     message:string
     count:number
+    id:number
 }
 
 export const Post:React.FC<PostPropsType>=(props ) =>{
