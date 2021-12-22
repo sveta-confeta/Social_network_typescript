@@ -1,7 +1,7 @@
 import s from "./Post.module.css";
 import React from "react";
 
-type PostPropsType={
+export type PostPropsType={
     message:string
     count:number
     id:number
