@@ -2,15 +2,17 @@ import React from "react";
 import s from './Profile.module.css';
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import {IndexPropsType} from "../../../index";
+import {PostDataType} from "../../../redux/state";
 
 
-export type MypostsPropsType={
-   postData: Array <IndexPropsType>
+
+export type PostPageType = {
+    postData: Array<PostDataType>
+
 }
 
 
-const Profile = (props:MypostsPropsType) => {
+const Profile = (props:PostPageType) => {
 
     return (
         <div>

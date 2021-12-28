@@ -1,14 +1,18 @@
 import React from "react";
 import s from './MyPosts.module.css';
 import {Post} from "./Post/Post";
+import {PostDataType} from "../../../../redux/state";
 
-import {IndexPropsType} from "../../../../index";
+
 
 export type PostPropsType={
-    postData:Array<IndexPropsType>
+    postData:Array<PostDataType>
 }
 
-const MyPosts = (props: PostPropsType) => {
+const MyPosts = (props:PostPropsType) => {
+    let addPost=()=>{
+        
+    }
 
     let postElements = props.postData.map(el => <Post id={el.id} message={el.message} count={el.count}/>)
     return (
@@ -17,6 +21,7 @@ const MyPosts = (props: PostPropsType) => {
             <div>
                 <textarea></textarea>
             </div>
+            <button onClick={addPost}>AddPost</button>
             <div className={s.posts}>
                 {postElements}
             </div>
