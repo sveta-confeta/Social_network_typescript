@@ -2,7 +2,7 @@ import React from "react";
 import s from './Header.module.css';
 
 
-const Header = () => {
+export const Header = () => {
     return (
         <header className={s.header}>
             <img className={s.logo} src="./logo.png" width="100" height="auto"/>
@@ -11,4 +11,3 @@ const Header = () => {
     )
 }
 
-export default Header;

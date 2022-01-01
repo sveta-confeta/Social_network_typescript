@@ -1,4 +1,14 @@
+import {rerenderEntireTree} from "../render";
+import React from "react";
 
+
+export type AddPostPropsType={
+    addPost:(postMessage:string)=>void
+}
+
+export type OnChangePropsType={
+    onPostChange:(newText:string)=>void
+}
 
 export type MessageDataType = {
     id: number
@@ -21,6 +31,7 @@ export type FriendDataType={
 
 export type ProfilePageType = {
     postData: Array<PostDataType>
+    newPostText:string
 }
 export type DialogsPageType = {
     dialogsData: Array<DialogsDataType>
@@ -39,7 +50,8 @@ export let State:StateType = { //добавляем к стейту типиза
     profilePage: {
         postData: [{id: 1, message: 'Hi, how are you?', count: 20},
             {id: 2, message: 'What are you doing on Saturday?', count: 25},
-            {id: 3, message: 'I miss...', count: 30}]
+            {id: 3, message: 'I miss...', count: 30}],
+        newPostText:" ",
     },
     dialogsPage: {
         dialogsData: [
@@ -63,6 +75,17 @@ export let State:StateType = { //добавляем к стейту типиза
         ]
 
 };
+
+export let addPost =(postMessage:string)=>{
+   const newPost:PostDataType={id:new Date().getTime(), message:postMessage,count:0};
+   State.profilePage.postData.push(newPost);
+   rerenderEntireTree(State);
+}
+export const onPostChange=(newText:string)=>{
+    State.profilePage.newPostText=newText;
+    rerenderEntireTree(State);
+}
+
 
 
 
