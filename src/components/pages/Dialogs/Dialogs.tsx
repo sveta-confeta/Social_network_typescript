@@ -15,6 +15,12 @@ export const Dialogs = (props: DialogsPageType) => {    //компонента �
 
     let dialogsElements = props.dialogsData.map(el => <Dialog_item id={el.id} name={el.name}/>);
     let messageElements= props.messageData.map(el=> <Message id={el.id} text={el.text}/>);
+    let changeTextarea=(event.)=>{
+
+    }
+    let clickHandler=()=>{
+
+    }
     //промапиваем данные, которые перебирались как обьекты по номерам ключей, и вместо них в ретурн вставляем переменные
     return (
         <div className={s.dialogs}>
@@ -24,6 +30,10 @@ export const Dialogs = (props: DialogsPageType) => {    //компонента �
             <div className={s.messages}>     {/*message*/}
                 {messageElements} {/*переменная*/}
             </div>
+            <textarea value={newText} onChange={changeTextarea}></textarea>
+            <button onClick={clickHandler}>Отправить сообщение</button>
+
+
 
 
         </div>

@@ -64,6 +64,23 @@ export type OnPostChangeActionType={
 export type ActionTypes=
     AddPostActionType | OnPostChangeActionType
 
+const ADD_POST='ADD-POST';
+const ON_POST_CHANGE='ON-POST-CHANGE';
+
+export const addPostActionCreator=(newPostText:string):AddPostActionType=>{
+    return{
+        type:ADD_POST,
+        postMessage:newPostText
+    }
+}
+export const onPostChangeActionCreator=(text:string): OnPostChangeActionType=>{
+    return {
+        type:ON_POST_CHANGE,
+        newText:text
+    }
+}
+
+
 export const store: StoreType = {
     _State: {
         profilePage: {
@@ -81,10 +98,7 @@ export const store: StoreType = {
             ]
             ,
             messageData: [
-                {id: 1, text: 'Hi!!!'},
-                {id: 2, text: 'Have you done motorcycle repairs?'},
-                {id: 3, text: 'We are flying to Odessa tomorrow!'},
-
+                {id: 1, text: newText},
             ]
         },
 
@@ -118,6 +132,10 @@ export const store: StoreType = {
     //     this._State.profilePage.newPostText = newText;
     //     this._rerenderEntireTree();
     // },
+    const changeTextarea=(newText:string)=>{  //функция которая добавляет содержимое инпута в данные
+        this._State.dialogsPage.messageData=newText;
+    }
+
     subscribe(collback: () => void) {
         this._rerenderEntireTree = collback;
     },
@@ -129,12 +147,12 @@ export const store: StoreType = {
         return this._State;
     },
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
+        if (action.type === ADD_POST) {
             const newPost: PostDataType = {id: new Date().getTime(), message: action.postMessage, count: 0};
             this._State.profilePage.postData.push(newPost);
             this._State.profilePage.newPostText = " "
             this._rerenderEntireTree();
-        } else if (action.type === 'ON-POST-CHANGE') {
+        } else if (action.type === ON_POST_CHANGE) {
             this._State.profilePage.newPostText = action.newText;
             this._rerenderEntireTree();
         }
