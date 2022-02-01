@@ -1,3 +1,5 @@
+import {v1} from "uuid";
+
 export type AddPostPropsType = {
     addPost: (postMessage: string) => void
 }
@@ -7,7 +9,7 @@ export type OnChangePropsType = {
 }
 
 export type MessageDataType = {
-    id: number
+    id: string
     text: string
 }
 export type DialogsDataType = {
@@ -32,6 +34,7 @@ export type ProfilePageType = {
 export type DialogsPageType = {
     dialogsData: Array<DialogsDataType>
     messageData: Array<MessageDataType>
+    newMessageText: string
 }
 
 
@@ -49,34 +52,59 @@ export type StoreType = {
     subscribe: (collback: () => void) => void
     _rerenderEntireTree: () => void
     getState: () => StateType
-    dispatch: (action:ActionTypes) => void
+    dispatch: (action: ActionTypes) => void
 }
 
 export type AddPostActionType = {
-    type:'ADD-POST'
-    postMessage:string
+    type: 'ADD-POST'
+    postMessage: string
 }
 
-export type OnPostChangeActionType={
-    type:'ON-POST-CHANGE'
-    newText:string
+export type OnPostChangeActionType = {
+    type: 'ON-POST-CHANGE'
+    newText: string
 }
-export type ActionTypes=
-    AddPostActionType | OnPostChangeActionType
+export type ActionTypes =
+    AddPostActionType | OnPostChangeActionType | SendMessageType | UpdateNewMessageTextType
 
-const ADD_POST='ADD-POST';
-const ON_POST_CHANGE='ON-POST-CHANGE';
+export type SendMessageType = {
+    type: 'SEND_MESSAGE'
+}
 
-export const addPostActionCreator=(newPostText:string):AddPostActionType=>{
-    return{
-        type:ADD_POST,
-        postMessage:newPostText
+export type UpdateNewMessageTextType = {
+    type: 'UPDATE_NEW_MESSAGE_TEXT'
+    text: string
+}
+
+const ADD_POST = 'ADD-POST';
+const ON_POST_CHANGE = 'ON-POST-CHANGE';
+const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE_NEW_MESSAGE_TEXT';
+const SEND_MESSAGE = 'SEND_MESSAGE';
+
+
+export const addPostActionCreator = (newPostText: string): AddPostActionType => {
+    return {
+        type: ADD_POST,
+        postMessage: newPostText
     }
 }
-export const onPostChangeActionCreator=(text:string): OnPostChangeActionType=>{
+export const onPostChangeActionCreator = (text: string): OnPostChangeActionType => {
     return {
-        type:ON_POST_CHANGE,
-        newText:text
+        type: ON_POST_CHANGE,
+        newText: text
+    }
+}
+
+
+export const sendMessageActionCreator = (): SendMessageType => {
+    return {
+        type: SEND_MESSAGE,
+    }
+};
+export const updateActionCreator = (text: string): UpdateNewMessageTextType => {
+    return {
+        type: UPDATE_NEW_MESSAGE_TEXT,
+        text: text
     }
 }
 
@@ -98,8 +126,9 @@ export const store: StoreType = {
             ]
             ,
             messageData: [
-                {id: 1, text: newText},
-            ]
+                {id: v1(), text: "Нello,my friends"},
+            ],
+            newMessageText: ' ',
         },
 
         friendData: [
@@ -132,9 +161,7 @@ export const store: StoreType = {
     //     this._State.profilePage.newPostText = newText;
     //     this._rerenderEntireTree();
     // },
-    const changeTextarea=(newText:string)=>{  //функция которая добавляет содержимое инпута в данные
-        this._State.dialogsPage.messageData=newText;
-    }
+
 
     subscribe(collback: () => void) {
         this._rerenderEntireTree = collback;
@@ -155,11 +182,17 @@ export const store: StoreType = {
         } else if (action.type === ON_POST_CHANGE) {
             this._State.profilePage.newPostText = action.newText;
             this._rerenderEntireTree();
+        } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) { //создали пустую строку,в которой будет текст из текстареа появляться
+            this._State.dialogsPage.newMessageText = action.text
+            this._rerenderEntireTree();
+        } else if (action.type === SEND_MESSAGE) {
+            let body = this._State.dialogsPage.newMessageText;
+            this._State.dialogsPage.messageData.push({id: v1(), text: body}); //добавили в обьект с данными новый обьект с ноавой id и с тем что пришло из текстареа
+            this._rerenderEntireTree();
         }
     }
 
 }
-//@ts-ignore
-window.store = store;//глобальное обращение
+
 
 

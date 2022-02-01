@@ -3,19 +3,24 @@ import reportWebVitals from './reportWebVitals';
 import {store} from "./redux/state";
 import ReactDOM from "react-dom";
 import App from "./App";
+import {BrowserRouter} from "react-router-dom";
 
 
 
 
 export let rerenderEntireTree = () => {
     ReactDOM.render(
+        <BrowserRouter>
         <React.StrictMode>
             <App store={store}
                  // addPost={store.addPost} onPostChange={store.onPostChange}
                 dispatch={store.dispatch.bind(store)}
             />
+
         </React.StrictMode>,
+        </BrowserRouter>,
         document.getElementById('root')
+
     );
 }
 
