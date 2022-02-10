@@ -8,7 +8,7 @@ import {
     MessageDataType,
     sendMessageActionCreator, StoreType,
     updateActionCreator
-} from "../../../redux/state";
+} from "../../../redux/gialogs-reduser";
 
 
 export type DialogsPageType = {
@@ -21,9 +21,16 @@ export type DialogsPageType = {
 }
 
 export const Dialogs = (props: DialogsPageType) => {    //компонента со всеми именами и сообщениями- где Dialog_item -это одно сообщение
+    debagger
     let state=props.store.getState().dialogsPage;
 
-    let dialogsElements = state.dialogsData.map(el => <Dialog_item id={el.id} name={el.name}/>);
+    let dialogsElements = state.dialogsData.map(el => {
+        debagger
+        return(
+            <Dialog_item id={el.id} name={el.name}/>
+        )
+    }
+
     let messageElements = state.messageData.map(el => <Message id={el.id} text={el.text}/>);
     let newMessageText = state.newMessageText;//пустую сторку через пропсы передаем сюда из данных, чтоб отрисовывать в текстареа что в нее приходит в эту строку
 

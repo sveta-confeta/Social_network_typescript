@@ -1,4 +1,7 @@
 import {v1} from "uuid";
+import {dialogsReduser} from "./gialogs-reduser";
+import {profileReduser} from './profile-reduser';
+import {friendsReduser} from './friends-reduser';
 
 export type AddPostPropsType = {
     addPost: (postMessage: string) => void
@@ -75,40 +78,6 @@ export type UpdateNewMessageTextType = {
     type: 'UPDATE_NEW_MESSAGE_TEXT'
     text: string
 }
-
-const ADD_POST = 'ADD-POST';
-const ON_POST_CHANGE = 'ON-POST-CHANGE';
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE_NEW_MESSAGE_TEXT';
-const SEND_MESSAGE = 'SEND_MESSAGE';
-
-
-export const addPostActionCreator = (newPostText: string): AddPostActionType => {
-    return {
-        type: ADD_POST,
-        postMessage: newPostText
-    }
-}
-export const onPostChangeActionCreator = (text: string): OnPostChangeActionType => {
-    return {
-        type: ON_POST_CHANGE,
-        newText: text
-    }
-}
-
-
-export const sendMessageActionCreator = (): SendMessageType => {
-    return {
-        type: SEND_MESSAGE,
-    }
-};
-export const updateActionCreator = (text: string): UpdateNewMessageTextType => {
-    return {
-        type: UPDATE_NEW_MESSAGE_TEXT,
-        text: text
-    }
-}
-
-
 export const store: StoreType = {
     _State: {
         profilePage: {
@@ -174,22 +143,11 @@ export const store: StoreType = {
         return this._State;
     },
     dispatch(action) {
-        if (action.type === ADD_POST) {
-            const newPost: PostDataType = {id: new Date().getTime(), message: action.postMessage, count: 0};
-            this._State.profilePage.postData.push(newPost);
-            this._State.profilePage.newPostText = " "
-            this._rerenderEntireTree();
-        } else if (action.type === ON_POST_CHANGE) {
-            this._State.profilePage.newPostText = action.newText;
-            this._rerenderEntireTree();
-        } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) { //создали пустую строку,в которой будет текст из текстареа появляться
-            this._State.dialogsPage.newMessageText = action.text
-            this._rerenderEntireTree();
-        } else if (action.type === SEND_MESSAGE) {
-            let body = this._State.dialogsPage.newMessageText;
-            this._State.dialogsPage.messageData.push({id: v1(), text: body}); //добавили в обьект с данными новый обьект с ноавой id и с тем что пришло из текстареа
-            this._rerenderEntireTree();
-        }
+        this._State.profilePage=profileReduser(this._State.profilePage,action);//отдаем редьюсеру то что ему нужно
+        this._State.dialogsPage=dialogsReduser(this._State.dialogsPage,action);//отдаем редьюсеру то что ему нужно
+        this._State.friendData=friendsReduser(this._State.friendData,action);//отдаем редьюсеру то что ему нужно
+     this._rerenderEntireTree();
+
     }
 
 }
