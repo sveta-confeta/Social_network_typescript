@@ -1,21 +1,34 @@
-import {ActionTypes, AddPostActionType, OnPostChangeActionType, PostDataType, StateType} from "./state";
+import {ActionTypes, AddPostActionType, OnPostChangeActionType, PostDataType} from "./state";
 
 const ADD_POST = 'ADD-POST';
 const ON_POST_CHANGE = 'ON-POST-CHANGE';
 
-const profileReduser=(state:StateType,action:ActionTypes)=>{
+type InitialProfileType=typeof initialState
 
-    if (action.type === ADD_POST) {
-        const newPost: PostDataType = {id: new Date().getTime(), message: action.postMessage, count: 0};
-        state.profilePage.postData.push(newPost);
-        state.profilePage.newPostText = " "
-
-    } else if (action.type === ON_POST_CHANGE) {
-        state.profilePage.newPostText = action.newText;
-
+let initialState={     //переносим сюда данные для профайла,которые лежали в profilePage
+        postData: [{id: 1, message: 'Hi, how are you?', count: 20},
+            {id: 2, message: 'What are you doing on Saturday?', count: 25},
+            {id: 3, message: 'I miss...', count: 30}] as Array<PostDataType>,
+        newPostText: " ",
     }
-    return state;
-}
+
+export const profileReducer = (state=initialState, action: ActionTypes):InitialProfileType => { //изначально в редаксе,в стейте  нет данных -поэтому мы обьявляем initiall state
+    switch (action.type) {                                                                                 //если данные не придут в стейт,тогда он будет отображать initialState
+        case ADD_POST :
+            const newPost: PostDataType = {id: new Date().getTime(), message: action.postMessage, count: 0};
+            state.postData.push(newPost);
+            state.newPostText = " ";
+            return state
+
+        case ON_POST_CHANGE :
+            state.newPostText = action.newText;
+            return state
+        default:
+            return state;
+
+    }};
+
+
 export const addPostActionCreator = (newPostText: string): AddPostActionType => {
     return {
         type: ADD_POST,

@@ -3,12 +3,11 @@ import s from "./Dialogs.module.css"
 import {Dialog_item} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import {
-    ActionTypes,
-    DialogsDataType,
-    MessageDataType,
-    sendMessageActionCreator, StoreType,
+    sendMessageActionCreator,
     updateActionCreator
 } from "../../../redux/gialogs-reduser";
+import {StoreType} from "../../../redux/redux-store";
+
 
 
 export type DialogsPageType = {
@@ -21,15 +20,17 @@ export type DialogsPageType = {
 }
 
 export const Dialogs = (props: DialogsPageType) => {    //компонента со всеми именами и сообщениями- где Dialog_item -это одно сообщение
-    debagger
+
     let state=props.store.getState().dialogsPage;
 
+
+    debugger
+
     let dialogsElements = state.dialogsData.map(el => {
-        debagger
         return(
             <Dialog_item id={el.id} name={el.name}/>
         )
-    }
+    })
 
     let messageElements = state.messageData.map(el => <Message id={el.id} text={el.text}/>);
     let newMessageText = state.newMessageText;//пустую сторку через пропсы передаем сюда из данных, чтоб отрисовывать в текстареа что в нее приходит в эту строку

@@ -9,24 +9,27 @@ import {Helping} from "./components/pages/Helping/Helping";
 import {Music} from "./components/pages/Music/Music";
 import {News} from "./components/pages/News/News";
 import Profile from "./components/pages/Profile/Profile";
-import {ActionTypes, store, StoreType} from './redux/state';
+import {ActionTypes} from './redux/state';
+import {AppStateType, StoreType} from "./redux/redux-store";
+
 
 
 export type AppPropsType = {
     store: StoreType
+    state:AppStateType
     // addPost:(postMessage:string)=>void
     // onPostChange:(newText:string)=>void
-    dispatch: (action: ActionTypes) => void
+    dispatch: (actions: ActionTypes ) => void
 
 }
 
 
 const App: React.FC<AppPropsType> = (props) => {
-    const state = props.store.getState();//передаем отрисовку state
+    //const state = props.store.getState();//передаем отрисовку state
     return (
         <div className="app-wrapper">
             <Header/>
-            <Navbar friendData={state.friendData}/>
+            <Navbar friendData={props.state.friendData}/>
             <div className="app-wrapper-content">
                 <Routes>
                     <Route path='/dialogs' element={<Dialogs
@@ -43,11 +46,11 @@ const App: React.FC<AppPropsType> = (props) => {
                         // dispatch={props.dispatch.bind(props.store)}
                         store={props.store}
                     />}/>
-                    <Route path='/profile' element={<Profile postData={state.profilePage.postData}
+                    <Route path='/profile' element={<Profile postData={props.state.profilePage.postData}
                         // onPostChange={props.store.onPostChange.bind(props.store)}
                         // addPost={props.store.addPost.bind(props.store)}
                                                              dispatch={props.store.dispatch.bind(props.store)}
-                                                             newPostText={state.profilePage.newPostText}/>}/>
+                                                             newPostText={props.state.profilePage.newPostText}/>}/>
                     <Route path='/news' element={<News/>}/>
                     <Route path='/music' element={<Music/>}/>
                     <Route path='/helping' element={<Helping/>}/>

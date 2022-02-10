@@ -1,7 +1,8 @@
 import {v1} from "uuid";
-import {dialogsReduser} from "./gialogs-reduser";
-import {profileReduser} from './profile-reduser';
-import {friendsReduser} from './friends-reduser';
+import {profileReducer} from "./profile-reduser";
+import {dialogsReducer} from "./gialogs-reduser";
+import {friendsReducer} from "./friends-reduser";
+
 
 export type AddPostPropsType = {
     addPost: (postMessage: string) => void
@@ -143,9 +144,9 @@ export const store: StoreType = {
         return this._State;
     },
     dispatch(action) {
-        this._State.profilePage=profileReduser(this._State.profilePage,action);//отдаем редьюсеру то что ему нужно
-        this._State.dialogsPage=dialogsReduser(this._State.dialogsPage,action);//отдаем редьюсеру то что ему нужно
-        this._State.friendData=friendsReduser(this._State.friendData,action);//отдаем редьюсеру то что ему нужно
+        this._State.profilePage=profileReducer(this._State.profilePage,action);//отдаем редьюсеру то что ему нужно
+        this._State.dialogsPage=dialogsReducer(this._State.dialogsPage,action);//отдаем редьюсеру то что ему нужно
+        this._State.friendData=friendsReducer(this._State.friendData,action);//отдаем редьюсеру то что ему нужно
      this._rerenderEntireTree();
 
     }
