@@ -9,7 +9,6 @@ import {BrowserRouter} from "react-router-dom";
 
 
 export let rerenderEntireTree = (state: AppStateType ) => {
-    debugger
     ReactDOM.render(
         <BrowserRouter>
         <React.StrictMode>

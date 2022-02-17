@@ -2,30 +2,27 @@ import React, {ChangeEvent} from "react";
 import s from "./Dialogs.module.css"
 import {Dialog_item} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {
-    sendMessageActionCreator,
-    updateActionCreator
-} from "../../../redux/gialogs-reduser";
-import {StoreType} from "../../../redux/redux-store";
+import {DialogsPageType} from "./DialogsConteiner";
 
 
-
-export type DialogsPageType = {
+export type DialogsPropsType = {
     // messageData: Array<MessageDataType>
     // dialogsData: Array<DialogsDataType>
-    // newMessageText: string
-    // dispatch: (action: ActionTypes) => void
-    store: StoreType
+  //  newMessageText: string
+    clickHandler:()=>void
+    onChangeHandler: (value: string) => void
+    dialogsPage:DialogsPageType
+
 
 }
 
-export const Dialogs = (props: DialogsPageType) => {    //компонента со всеми именами и сообщениями- где Dialog_item -это одно сообщение
+export const Dialogs = (props: DialogsPropsType) => {    //компонента со всеми именами и сообщениями- где Dialog_item -это одно сообщение
 
-    let state=props.store.getState().dialogsPage;
+    let state = props.dialogsPage;
 
 
     let dialogsElements = state.dialogsData.map(el => {
-        return(
+        return (
             <Dialog_item id={el.id} name={el.name}/>
         )
     })
@@ -35,12 +32,13 @@ export const Dialogs = (props: DialogsPageType) => {    //компонента �
 
     const onChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
         let value = event.currentTarget.value; //получили значение textarea и теперь его надо отправить в bll
-         props.store.dispatch(updateActionCreator(value));
+        props.onChangeHandler(value);
+        // props.store.dispatch(updateActionCreator(value));
 
     }
     const clickHandler = () => {
-props.store.dispatch(sendMessageActionCreator());
-
+// props.store.dispatch(sendMessageActionCreator());
+props.newMessageText();
     }
 
     //промапиваем данные, которые перебирались как обьекты по номерам ключей, и вместо них в ретурн вставляем переменные
