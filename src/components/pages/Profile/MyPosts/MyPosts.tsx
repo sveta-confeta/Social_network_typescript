@@ -1,34 +1,33 @@
 import React, {ChangeEvent} from "react";
 import s from './MyPosts.module.css';
 import {Post} from "./Post/Post";
-import { onPostChangeActionCreator} from "../../../../redux/profile-reduser";
-import {addPostActionCreator} from "../../../../redux/profile-reduser";
-import {ActionTypes, PostDataType} from "../../../../redux/state";
+import { PostDataType} from "../../../../redux/state";
 
 
-export type PostPropsType={
-    postData:Array<PostDataType>
-    // addPost:(postMessage:string)=>void
-    newPostText:string
-    // onPostChange:(newText:string)=>void
-    dispatch:(action:ActionTypes)=>void
+export type PostPropsType = {
+    postData: Array<PostDataType>
+     addPost:(postMessage:string)=>void
+    newPostText: string
+    onPostChange: (newText: string) => void
+    // dispatch: (action: ActionTypes) => void
 }
 
-const MyPosts = (props:PostPropsType) => {
+const MyPosts = (props: PostPropsType) => {
 
 
-    const addPost=()=>{
+    const onAddPost = () => {
+        // props.addPost();
+         props.addPost(props.newPostText);
+        // let action = addPostActionCreator(props.newPostText);
+        // props.dispatch(action);
+    }
 
-            // props.addPost(props.newPostText);
-        let action=addPostActionCreator(props.newPostText);
-            props.dispatch(action);
-        }
+    let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        let text = e.currentTarget.value;
+        props.onPostChange(text);
 
-        let onPostChange=(e:ChangeEvent<HTMLTextAreaElement>)=>{
-     // props.onPostChange(e.currentTarget.value);
-            let text = e.currentTarget.value;
-            let action = onPostChangeActionCreator(text);
-            props.dispatch(action)
+        // let action = onPostChangeActionCreator(text);
+        // props.dispatch(action)
 
     }
 
@@ -37,9 +36,9 @@ const MyPosts = (props:PostPropsType) => {
         <div className={s.posts_block}>
             My posts
             <div>
-                <textarea  onChange={onPostChange} value={props.newPostText}></textarea>
+                <textarea onChange={onPostChange} value={props.newPostText}/>
             </div>
-            <button onClick={addPost}>AddPost</button>
+            <button onClick={onAddPost}>AddPost</button>
             <div className={s.posts}>
                 {postElements}
             </div>

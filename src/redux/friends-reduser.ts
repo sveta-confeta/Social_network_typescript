@@ -1,11 +1,11 @@
 import {ActionTypes, FriendDataType} from "./state";
 
 
-let initialState= [
-            {
-                id: 1,
-                name_friend: 'Diogen Motogonych',
-                img_friend: 'https://i.pinimg.com/236x/b3/01/e6/b301e6ea3e8b0632c158010d38d21a60.jpg'
+let initialState = [
+    {
+        id: 1,
+        name_friend: 'Diogen Motogonych',
+        img_friend: 'https://i.pinimg.com/236x/b3/01/e6/b301e6ea3e8b0632c158010d38d21a60.jpg'
 
     },
     {
@@ -20,8 +20,8 @@ let initialState= [
     },
 ] as Array<FriendDataType>;
 
-export type InitialStateType=typeof initialState;
-export const friendsReducer=(state: InitialStateType=initialState,action:ActionTypes):InitialStateType=>{
+export type InitialStateType = typeof initialState;
+export const friendsReducer = (state: InitialStateType = initialState, action: ActionTypes): InitialStateType => {
 
     return state;
 }

@@ -25,7 +25,6 @@ export type AppPropsType = {
 
 
 const App: React.FC<AppPropsType> = (props) => {
-    //const state = props.store.getState();//передаем отрисовку state
     return (
         <div className="app-wrapper">
             <Header/>
@@ -46,11 +45,13 @@ const App: React.FC<AppPropsType> = (props) => {
                         // dispatch={props.dispatch.bind(props.store)}
                         store={props.store}
                     />}/>
-                    <Route path='/profile' element={<Profile postData={props.state.profilePage.postData}
+                    <Route path='/profile' element={<Profile store={props.store}
+                                                             // postData={props.state.profilePage.postData}
                         // onPostChange={props.store.onPostChange.bind(props.store)}
                         // addPost={props.store.addPost.bind(props.store)}
                                                              dispatch={props.store.dispatch.bind(props.store)}
-                                                             newPostText={props.state.profilePage.newPostText}/>}/>
+                                                             // newPostText={props.state.profilePage.newPostText}
+                    />}/>
                     <Route path='/news' element={<News/>}/>
                     <Route path='/music' element={<Music/>}/>
                     <Route path='/helping' element={<Helping/>}/>

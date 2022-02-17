@@ -24,8 +24,6 @@ export const Dialogs = (props: DialogsPageType) => {    //компонента �
     let state=props.store.getState().dialogsPage;
 
 
-    debugger
-
     let dialogsElements = state.dialogsData.map(el => {
         return(
             <Dialog_item id={el.id} name={el.name}/>
