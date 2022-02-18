@@ -10,8 +10,11 @@ let reducers=combineReducers({//сюда поместим все редьюсе�
 });
 
 
+
 export type AppStateType = ReturnType<typeof reducers>
+
 export let store=createStore(reducers);//закомбаненный редьюссеры отдаем стору
+
 export type StoreType = typeof  store
 
  //теперь его импортируем в других файлах
