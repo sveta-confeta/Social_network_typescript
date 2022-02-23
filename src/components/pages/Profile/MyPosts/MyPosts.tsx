@@ -14,7 +14,6 @@ export type PostPropsType = {
 
 const MyPosts = (props: PostPropsType) => {
 
-
     const onAddPost = () => {
         // props.addPost();
          props.addPost(props.newPostText);

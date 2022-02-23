@@ -8,10 +8,11 @@ import {Helping} from "./components/pages/Helping/Helping";
 import {Music} from "./components/pages/Music/Music";
 import {News} from "./components/pages/News/News";
 import Profile from "./components/pages/Profile/Profile";
-// import {ActionTypes} from './redux/state';
-// import {AppStateType, StoreType} from "./redux/redux-store";
+
 import {DialogsConteiner} from "./components/pages/Dialogs/DialogsConteiner";
-import {StoreType} from "./redux/state";
+import {store} from "./redux/redux-store";
+
+
 
 
 
@@ -29,13 +30,11 @@ const App =(props:AppPropsType) => {
     return (
         <div className="app-wrapper">
             <Header/>
-            <Navbar friendData={store.friendData}/>
+            <Navbar friendData={store.frends}/>
             <div className="app-wrapper-content">
                 <Routes>
                     <Route path='/dialogs' element={<DialogsConteiner
-                        store={store}
-
-                    />}/>
+                        store={store}/>}/>
                     <Route path='/dialogs/:id' element={<DialogsConteiner
 
                         store={store}

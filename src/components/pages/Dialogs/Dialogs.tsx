@@ -34,9 +34,10 @@ export const Dialogs = (props: DialogsPropsType) => {    //компонента 
 
     }
     const clickHandler = () => {
+        debugger
 // props.store.dispatch(sendMessageActionCreator());
 
-        //props.newMessageText; //не работает
+        props.newMessageText(); //не работает
     }
 
     //промапиваем данные, которые перебирались как обьекты по номерам ключей, и вместо них в ретурн вставляем переменные

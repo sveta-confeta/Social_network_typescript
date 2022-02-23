@@ -29,12 +29,18 @@ export type InitialStateType=typeof initialState;
 export const dialogsReducer = (state=initialState, action: ActionTypes):InitialStateType => {
     switch (action.type) {
         case UPDATE_NEW_MESSAGE_TEXT :
-            state.newMessageText = action.text
-            return state;
-        case  SEND_MESSAGE :
+            let copyState = {...state, newMessageText:action.text};
+            return copyState;
+        case  SEND_MESSAGE :{
             let body = state.newMessageText;
-            state.messageData.push({id: v1(), text: body}); //добавили в обьект с данными новый обьект с ноавой id и с тем что пришло из текстареа
-            return state;
+            let copyState = {...state,
+                newMessageText: ' ',
+                messageData:[...state.messageData,{id: v1(), text: body}]};
+            
+            return  copyState;
+        }
+
+
         default:
             return state;
 

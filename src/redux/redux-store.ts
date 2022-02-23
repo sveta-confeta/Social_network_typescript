@@ -16,5 +16,7 @@ export type AppStateType = ReturnType<typeof reducers>
 export let store=createStore(reducers);//закомбаненный редьюссеры отдаем стору
 
 export type StoreType = typeof  store
+//@ts-ignore
+window.store=store;
 
  //теперь его импортируем в других файлах
