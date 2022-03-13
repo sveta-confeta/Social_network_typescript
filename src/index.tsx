@@ -12,12 +12,7 @@ import {Provider} from "react-redux";
         <BrowserRouter>
         <React.StrictMode>
             <Provider store={store}>
-            <App
-                // store ={store}
-                //  state={state}
-                //  // addPost={store.addPost} onPostChange={store.onPostChange}
-                // dispatch={store.dispatch.bind(store)}
-            />
+            <App/>
             </Provider>
 
         </React.StrictMode>,

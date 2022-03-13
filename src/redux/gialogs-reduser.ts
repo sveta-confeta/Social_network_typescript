@@ -26,7 +26,9 @@ let initialState={
 };
 export type InitialStateType=typeof initialState;
 
-export const dialogsReducer = (state=initialState, action: ActionTypes):InitialStateType => {
+export const dialogsReducer = (state:InitialStateType=initialState, action: ActionTypes):InitialStateType => {
+
+
     switch (action.type) {
         case UPDATE_NEW_MESSAGE_TEXT :
             let copyState = {...state, newMessageText:action.text};
@@ -35,7 +37,7 @@ export const dialogsReducer = (state=initialState, action: ActionTypes):InitialS
             let body = state.newMessageText;
             let copyState = {...state,
                 newMessageText: ' ',
-                messageData:[...state.messageData,{id: v1(), text: body}]};
+                messageData:[...state.messageData,{id: v1(), text:body}]};
             
             return  copyState;
         }

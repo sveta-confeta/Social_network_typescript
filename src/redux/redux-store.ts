@@ -9,11 +9,10 @@ let reducers=combineReducers({//сюда поместим все редьюсе�
     friendData:friendsReducer
 });
 
-
+export let store=createStore(reducers);//закомбаненный редьюссеры отдаем стору
 
 export type AppStateType = ReturnType<typeof reducers>
-
-export let store=createStore(reducers);//закомбаненный редьюссеры отдаем стору
+export type DispatchType = typeof store.dispatch
 
 export type StoreType = typeof  store
 //@ts-ignore

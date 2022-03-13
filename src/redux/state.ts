@@ -120,18 +120,6 @@ export const store: StoreType = {
         ]
 
     },
-    // addPost(postMessage: string) { //добавляем addPost в типизацию Store
-    //     const newPost: PostDataType = {id: new Date().getTime(), message: postMessage, count: 0};
-    //     this._State.profilePage.postData.push(newPost);
-    //     this._State.profilePage.newPostText = " "
-    //
-    //     this._rerenderEntireTree();
-    // },
-    // onPostChange(newText: string) {
-    //     this._State.profilePage.newPostText = newText;
-    //     this._rerenderEntireTree();
-    // },
-
 
     subscribe(collback: () => void) {
         this._rerenderEntireTree = collback;
@@ -140,7 +128,6 @@ export const store: StoreType = {
         console.log('state changed')
     },
     getState() {
-        debugger
         return this._State;
     },
     dispatch(action) {

@@ -30,7 +30,7 @@ const App =(props:AppPropsType) => {
     return (
         <div className="app-wrapper">
             <Header/>
-            <Navbar friendData={store.frends}/>
+            <Navbar friendData={store.getState().friendData}/>
             <div className="app-wrapper-content">
                 <Routes>
                     <Route path='/dialogs' element={<DialogsConteiner
@@ -40,11 +40,9 @@ const App =(props:AppPropsType) => {
                         store={store}
                     />}/>
                     <Route path='/profile' element={<Profile store={store}
-                                                             // postData={props.state.profilePage.postData}
-                        // onPostChange={props.store.onPostChange.bind(props.store)}
-                        // addPost={props.store.addPost.bind(props.store)}
+
                                                              dispatch={store.dispatch.bind(store)}
-                                                             // newPostText={props.state.profilePage.newPostText}
+
                     />}/>
                     <Route path='/news' element={<News/>}/>
                     <Route path='/music' element={<Music/>}/>

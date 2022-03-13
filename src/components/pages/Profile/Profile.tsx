@@ -2,8 +2,8 @@ import React from "react";
 import s from './Profile.module.css';
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import {ActionTypes, PostDataType} from "../../../redux/state";
-import {MyPostsConteiner} from "./MyPosts/MyPostsConteiner";
 import {StoreType} from "../../../redux/redux-store";
+import {MyPostsContainer} from "./MyPosts/MyPostsConteiner";
 
 
 
@@ -15,7 +15,7 @@ export type PostPageType = {
     // newPostText:string
     //  onPostChange:(newText:string)=>void
     dispatch:(action:ActionTypes)=>void
-    store: StoreType
+    store: any
 
 }
 
@@ -25,7 +25,8 @@ const Profile = (props:PostPageType) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPostsConteiner  //теперь мы данными снабжаем не MyPosts, а его контейнер
+            {/* eslint-disable-next-line react/jsx-no-undef */}
+            <MyPostsContainer  //теперь мы данными снабжаем не MyPosts, а его контейнер
                 store={props.store}
                 // postData={props.postData}
                 //      dispatch={props.dispatch}

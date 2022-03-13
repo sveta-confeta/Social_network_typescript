@@ -12,19 +12,20 @@ let initialState = {     //переносим сюда данные для пр�
     newPostText: " ",
 }
 
-export const profileReducer = (state = initialState, action: ActionTypes): InitialProfileType => { //изначально в редаксе,в стейте  нет данных -поэтому мы обьявляем initiall state
+export const profileReducer = (state:InitialProfileType = initialState, action: ActionTypes): InitialProfileType => { //изначально в редаксе,в стейте  нет данных -поэтому мы обьявляем initiall state
     switch (action.type) {                                                                                 //если данные не придут в стейт,тогда он будет отображать initialState
         case ADD_POST : {
             const newPost: PostDataType = {id: new Date().getTime(), message: action.postMessage, count: 0};
-            let copyState = {...state};
-            copyState.postData = [...state.postData]
-            copyState.postData.push(newPost);
-            copyState.newPostText = " ";
+            let copyState = {...state,
+            postData:[...state.postData,newPost],
+                newPostText: " "};
             return copyState;
         }
         case ON_POST_CHANGE :{
-            let copyState={...state}
-            copyState.newPostText = action.newText;
+            let copyState={...state,
+                newPostText:action.newText
+            }
+
             return copyState
         }
         default:
